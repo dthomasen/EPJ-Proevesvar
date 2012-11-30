@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu" >
+
+    <Button
+        android:id="@+id/mypatients"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:text="My Patients" 
+        android:textSize="40dp" />
+
+    <Button
+        android:id="@+id/patientsinformation"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_below="@+id/mypatients"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Patient Information" 
+        android:textSize="40dp" />
+    
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/logout"
+        android:layout_marginBottom="41dp"
+        android:text="Logout"
+        android:textSize="40dp" />
+
+</RelativeLayout>

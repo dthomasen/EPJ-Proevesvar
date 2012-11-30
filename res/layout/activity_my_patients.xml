@@ -1,13 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPatients" >
+    tools:context=".MyPatients" 
+    android:orientation="vertical">
 
+    <dk.iha.itsmap.dpn.epjproevesvar.business.PatientsFilterView
+        android:id="@+id/FilterText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Søgning"
+        android:windowSoftInputMode="stateHidden" >
+
+        <requestFocus />
+    </dk.iha.itsmap.dpn.epjproevesvar.business.PatientsFilterView>
+    
     <ListView
         android:id="@android:id/list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" >
     </ListView>
 
-</RelativeLayout>
+</LinearLayout>

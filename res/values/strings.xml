@@ -8,5 +8,6 @@
     <string name="title_activity_favorite_patients">Favorite Patients</string>
     <string name="title_activity_patient_information">Patient Information</string>
     <string name="title_activity_test">Test</string>
+    <string name="title_activity_patient_overview">PatientOverview</string>
 
 </resources>

@@ -1,12 +1,17 @@
 package dk.iha.itsmap.dpn.epjproevesvar;
 
-public class Favorite {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Favorite implements Serializable{
 	private String cpr;
 	private String name;
 	private String color;
 	private Boolean hasUnreadNews;
 	private String notificationMode;
-	
+
 	public String getCpr() {
 		return cpr;
 	}
@@ -37,6 +42,6 @@ public class Favorite {
 	public void setNotificationMode(String notificationMode) {
 		this.notificationMode = notificationMode;
 	}
-	
-	
+
+
 }

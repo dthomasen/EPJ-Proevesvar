@@ -14,8 +14,17 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+        public static final int CPRLabel=0x7f070006;
+        public static final int CPROutput=0x7f070007;
+        public static final int ColorLabel=0x7f070008;
+        public static final int ColorOutput=0x7f070009;
+        public static final int FilterText=0x7f070003;
+        public static final int NameLabel=0x7f070004;
+        public static final int NameOutput=0x7f070005;
+        public static final int NotificationModeLabel=0x7f07000a;
+        public static final int NotificationOutput=0x7f07000b;
         public static final int logout=0x7f070002;
-        public static final int menu_settings=0x7f070003;
+        public static final int menu_settings=0x7f07000c;
         public static final int mypatients=0x7f070000;
         public static final int patientsinformation=0x7f070001;
     }
@@ -23,14 +32,17 @@ public final class R {
         public static final int activity_main_menu=0x7f030000;
         public static final int activity_my_patients=0x7f030001;
         public static final int activity_patient_information=0x7f030002;
-        public static final int activity_test=0x7f030003;
+        public static final int activity_patient_overview=0x7f030003;
+        public static final int activity_test=0x7f030004;
+        public static final int customlistview=0x7f030005;
     }
     public static final class menu {
         public static final int activity_favorite_patients=0x7f060000;
         public static final int activity_main_menu=0x7f060001;
         public static final int activity_my_patients=0x7f060002;
         public static final int activity_patient_information=0x7f060003;
-        public static final int activity_test=0x7f060004;
+        public static final int activity_patient_overview=0x7f060004;
+        public static final int activity_test=0x7f060005;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -39,6 +51,7 @@ public final class R {
         public static final int title_activity_favorite_patients=0x7f040004;
         public static final int title_activity_my_patients=0x7f040003;
         public static final int title_activity_patient_information=0x7f040005;
+        public static final int title_activity_patient_overview=0x7f040007;
         public static final int title_activity_test=0x7f040006;
     }
     public static final class style {

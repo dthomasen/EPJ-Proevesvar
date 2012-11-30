@@ -7,8 +7,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
-    <uses-permission android:name="android.permission.INTERNET" /> 
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,7 @@
         </activity>
         <activity
             android:name="dk.iha.itsmap.dpn.epjproevesvar.MyPatients"
-            android:label="@string/title_activity_my_patients" 
+            android:label="@string/title_activity_my_patients"
             android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.MainMenu" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,7 +53,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:enabled="true" android:name="FavoritesDownloadServices" />
+
+        <service
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.FavoritesDownloadServices"
+            android:enabled="true" />
+
+        <activity
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.PatientOverview"
+            android:label="@string/title_activity_patient_overview"
+            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.MyPatients" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dk.iha.itsmap.dpn.epjproevesvar.MyPatients" />
+        </activity>
     </application>
 
 </manifest>

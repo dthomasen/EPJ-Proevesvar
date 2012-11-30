@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dk.iha.itsmap.dpn.epjproevesvar.FavoritesDownloadServices.GetFavoritesBinder;
+import dk.iha.itsmap.dpn.epjproevesvar.business.PatientsFilterView;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.app.Activity;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,6 +43,7 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 	private ArrayAdapter<String> adapter;
 	private ListView favoritesList;
 	private boolean mBound = false;
+	private PatientsFilterView filterInput;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +52,15 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		favoritesList = getListView();
 		favoriteNames = new ArrayList<String>();
-		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, favoriteNames);
+		adapter = new ArrayAdapter<String>(this, R.layout.customlistview, favoriteNames);
+		filterInput = (PatientsFilterView) findViewById(R.id.FilterText);
+		filterInput.addTextChangedListener(this);
 		favoritesList.setAdapter(adapter);
 		favoritesList.setOnItemClickListener(this);
 		updateReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG,"StationsUpdated broadcast recieved");
+                Log.d(TAG,"FavoritesUpdated broadcast recieved");
                 favorites = getFavoritesService.getFavorites();
                 for(Favorite s : favorites){
                 	favoriteNames.add(s.getName());
@@ -154,17 +159,9 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 		Log.d(TAG,"StationsListItem clicked");
 		Favorite choosenFavorites = favoriteMap.get(((TextView) view).getText());
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Du har klikket")
-		       .setTitle("Dette er en titel")
-		       .setIcon(R.drawable.ic_launcher);
-		
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-			}
-		});
-		AlertDialog dialog = builder.create();
-		dialog.show();
+		Intent i = new Intent(this, PatientOverview.class);
+		i.putExtra("ChoosenPatient", choosenFavorites);
+  		
+  		startActivity(i);
 	}
 }

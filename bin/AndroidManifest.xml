@@ -17,54 +17,48 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="dk.iha.itsmap.dpn.epjproevesvar.MainMenu"
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.MainMenu"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name="dk.iha.itsmap.dpn.epjproevesvar.MyPatients"
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.MyPatients"
             android:label="@string/title_activity_my_patients"
-            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.MainMenu" >
+            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.screens.MainMenu" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dk.iha.itsmap.dpn.epjproevesvar.MainMenu" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                android:value="dk.iha.itsmap.dpn.epjproevesvar.screens.MainMenu" />
         </activity>
         <activity
-            android:name="dk.iha.itsmap.dpn.epjproevesvar.PatientInformation"
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.PatientInformation"
             android:label="@string/title_activity_patient_information"
-            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.MainMenu" >
+            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.screens.MainMenu" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dk.iha.itsmap.dpn.epjproevesvar.MainMenu" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                android:value="dk.iha.itsmap.dpn.epjproevesvar.screens.MainMenu" />
         </activity>
 
         <service
-            android:name="dk.iha.itsmap.dpn.epjproevesvar.FavoritesDownloadServices"
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices"
             android:enabled="true" />
 
         <activity
-            android:name="dk.iha.itsmap.dpn.epjproevesvar.PatientOverview"
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.PatientOverview"
             android:label="@string/title_activity_patient_overview"
-            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.MyPatients" >
+            android:parentActivityName="dk.iha.itsmap.dpn.epjproevesvar.screens.MyPatients" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dk.iha.itsmap.dpn.epjproevesvar.MyPatients" />
+                android:value="dk.iha.itsmap.dpn.epjproevesvar.screens.MyPatients" />
+        </activity>
+        <activity
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.Login"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

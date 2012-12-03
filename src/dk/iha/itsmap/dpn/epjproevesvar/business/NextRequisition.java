@@ -1,10 +1,11 @@
 package dk.iha.itsmap.dpn.epjproevesvar.business;
 
 import java.util.List;
+
 public class NextRequisition {
     private String samplingTime;
-    private List<Analyses> analyses;
-
+    private List<UAnalyses> analyses;
+    
     public String getSamplingTime() {
         return samplingTime;
     }
@@ -13,11 +14,11 @@ public class NextRequisition {
         this.samplingTime=samplingTime;
     }
     
-    public List<Analyses> getAnalyses() {
+    public List<UAnalyses> getAnalyses() {
         return analyses;
     }
     
-    public void setAnalyses(List<Analyses> analyses){
+    public void setAnalyses(List<UAnalyses> analyses){
         this.analyses=analyses;
     }
 }

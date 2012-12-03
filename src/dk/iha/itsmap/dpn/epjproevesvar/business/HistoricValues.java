@@ -1,10 +1,11 @@
 package dk.iha.itsmap.dpn.epjproevesvar.business;
 
 public class HistoricValues {
+	
     private String samplingTime;
     private String value;
     private Boolean outsideNormalRange;
-
+    
     public String getSamplingTime() {
         return samplingTime;
     }

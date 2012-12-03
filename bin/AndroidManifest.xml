@@ -40,6 +40,9 @@
         <service
             android:name="dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices"
             android:enabled="true" />
+        <service
+            android:name="dk.iha.itsmap.dpn.epjproevesvar.services.LabResultDownloadService"
+            android:enabled="true" />
 
         <activity
             android:name="dk.iha.itsmap.dpn.epjproevesvar.screens.PatientOverview"

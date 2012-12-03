@@ -170,7 +170,7 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 		
 		Intent i = new Intent(this, PatientOverview.class);
 		i.putExtra("ChoosenPatient", choosenFavorites);
+		i.putExtra("Authorization", authorization);
 		startActivityForResult(i, 0);
-//  		startActivity(i); 
 	}
 }

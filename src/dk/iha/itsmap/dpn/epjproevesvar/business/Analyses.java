@@ -1,14 +1,15 @@
- package dk.iha.itsmap.dpn.epjproevesvar.business;
+package dk.iha.itsmap.dpn.epjproevesvar.business;
+
 import java.util.List;
 public class Analyses {
     private String analysisName;
-    private String value;
-    private Boolean outsideNormalRange;
     private List<HistoricValues> historicValues;
-    private String min;
     private String max;
-
-    public String getAnalysisName(){
+    private String min;
+    private Boolean outsideNormalRange;
+    private String value;
+    
+    public String getAnalysisName() {
         return analysisName;
     }
     
@@ -16,7 +17,7 @@ public class Analyses {
         this.analysisName=analysisName;
     }
     
-    public String getValue(){
+    public String getValue() {
         return value;
     }
     
@@ -24,13 +25,14 @@ public class Analyses {
         this.value=value;
     }
     
-    public Boolean getOutsideNormalRange(){
+    public Boolean getOutsideNormalRange() {
         return outsideNormalRange;
     }
     
     public void setOutsideNormalRange(Boolean outsideNormalRange){
         this.outsideNormalRange=outsideNormalRange;
     }
+    
     
     public String getMin() {
         return min;
@@ -46,10 +48,10 @@ public class Analyses {
     
     public void setMax(String max){
         this.max=max;
-        
     }
+    
     public List<HistoricValues> getHistoricValues() {
-        return historicValues;   
+        return historicValues;
     }
     
     public void setHistoricValues(List<HistoricValues> historicValues){

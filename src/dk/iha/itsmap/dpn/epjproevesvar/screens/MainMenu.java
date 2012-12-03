@@ -58,14 +58,13 @@ public class MainMenu extends Activity implements OnClickListener{
 			MyPatients.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			MyPatients.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivityForResult(MyPatients, 0);
-//			this.startActivity(MyPatients);
 			break;
 		case R.id.patientsinformation:
 			Log.d(TAG,"Patients information Button Clicked");
 			Intent PatientsInformation = new Intent(this, PatientInformation.class);
 			PatientsInformation.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			PatientsInformation.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			this.startActivity(PatientsInformation);
+			startActivityForResult(PatientsInformation, 0);
 			break;
 		}
 

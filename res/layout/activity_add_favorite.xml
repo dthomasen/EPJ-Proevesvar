@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".AddFavorite" >
+
+    <LinearLayout
+        style="@style/LoginFormContainer"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/cprTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CPR-Number"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="35dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/submitcprbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Find"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+</LinearLayout>

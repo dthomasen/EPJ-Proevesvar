@@ -6,8 +6,10 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_my_patients">My Patients</string>
     <string name="title_activity_favorite_patients">Favorite Patients</string>
-    <string name="title_activity_patient_information">Patient Information</string>
+    <string name="title_activity_manage_favorites">Manage Favorites</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_patient_overview">PatientOverview</string>
+    <string name="title_activity_add_favorite">AddFavorite</string>
+    <string name="title_activity_remove_favorite">RemoveFavorite</string>
 
 </resources>

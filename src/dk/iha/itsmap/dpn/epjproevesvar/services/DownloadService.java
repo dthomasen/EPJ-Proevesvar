@@ -15,7 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-public class AsyncFavoritePatientsDownload extends AsyncTask<String, Boolean, String>{
+public class DownloadService extends AsyncTask<String, Boolean, String>{
 
 	private String result = "";
 
@@ -34,7 +34,6 @@ public class AsyncFavoritePatientsDownload extends AsyncTask<String, Boolean, St
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//	  		httpClient.getConnectionManager().shutdown();
 
 		HttpEntity httpEntity = webServerResponse.getEntity();
 
@@ -50,7 +49,12 @@ public class AsyncFavoritePatientsDownload extends AsyncTask<String, Boolean, St
 				e.printStackTrace();
 			}
 		}
-
+		
+		if(webServerResponse.getStatusLine().getStatusCode() == 400){
+			return "badRequest";
+		}else if(webServerResponse.getStatusLine().getStatusCode() == 404){
+			return "notFound";
+		}
 		return result;
 	}
 

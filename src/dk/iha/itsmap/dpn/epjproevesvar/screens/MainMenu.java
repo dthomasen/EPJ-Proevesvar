@@ -25,7 +25,7 @@ public class MainMenu extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_main_menu);
 		logoutButton = (Button) findViewById(R.id.logout);
 		myPatientsButton = (Button) findViewById(R.id.mypatients);
-		patientsInfoButton = (Button) findViewById(R.id.patientsinformation);
+		patientsInfoButton = (Button) findViewById(R.id.managefavorites);
 		authorization = getIntent().getExtras().getString("Authorization");
 
 		logoutButton.setOnClickListener(this);
@@ -59,12 +59,13 @@ public class MainMenu extends Activity implements OnClickListener{
 			MyPatients.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivityForResult(MyPatients, 0);
 			break;
-		case R.id.patientsinformation:
-			Log.d(TAG,"Patients information Button Clicked");
-			Intent PatientsInformation = new Intent(this, PatientInformation.class);
-			PatientsInformation.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			PatientsInformation.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivityForResult(PatientsInformation, 0);
+		case R.id.managefavorites:
+			Log.d(TAG,"Manage Favorites Button Clicked");
+			Intent ManageFavorites = new Intent(this, ManageFavorites.class);
+			ManageFavorites.putExtra("Authorization", authorization);
+			ManageFavorites.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			ManageFavorites.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivityForResult(ManageFavorites, 0);
 			break;
 		}
 

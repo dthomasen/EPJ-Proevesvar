@@ -85,142 +85,165 @@ public class PatientOverview extends Activity {
 	}
 
 	private void updateLabResultViews(LabResult labresults){
-		//Latest lab results
-		Analyses latest = labresults.getAnswers().get(0).getAnalyses().get(0);
-
-		//Sampling time
-		TextView samplingTime = new TextView(this);
-		samplingTime.setText(labresults.getAnswers().get(0).getSamplingTime());
-		samplingTime.setId(1);
-		samplingTime.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		samplingTime.setPadding(0, 10, 0, 0);
-		samplingTime.setGravity(Gravity.CENTER_HORIZONTAL);
-		latestLabResultLayout.addView(samplingTime);
-
-		TextView analysisName = new TextView(this);
-		analysisName.setText(latest.getAnalysisName());
-		analysisName.setId(1);
-		analysisName.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		analysisName.setGravity(Gravity.CENTER_HORIZONTAL);
-		latestLabResultLayout.addView(analysisName);
-
-		TextView value = new TextView(this);
-		value.setText("Value: "+latest.getValue());
-		value.setId(1);
-		value.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		value.setGravity(Gravity.CENTER_HORIZONTAL);
-		if(latest.getOutsideNormalRange()){
-			value.setTextColor(Color.RED);
-		}
-		latestLabResultLayout.addView(value);
-
-		TextView min = new TextView(this);
-		min.setText("Min: "+latest.getMin());
-		min.setId(1);
-		min.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		min.setGravity(Gravity.CENTER_HORIZONTAL);
-		latestLabResultLayout.addView(min);
-
-		TextView max = new TextView(this);
-		max.setText("Max: "+latest.getMax());
-		max.setId(1);
-		max.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		max.setGravity(Gravity.CENTER_HORIZONTAL);
-		latestLabResultLayout.addView(max);
-
-		TextView historicValues = new TextView(this);
-		historicValues.setText("Previous values");
-		historicValues.setId(1);
-		historicValues.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		historicValues.setPadding(0, 10, 0, 0);
-		historicValues.setGravity(Gravity.CENTER_HORIZONTAL);
-		historicValues.setTypeface(null,Typeface.BOLD);
-		historicValues.setPadding(0, 10, 0, 0);
-		historicValues.setTextSize(18);
-		latestLabResultLayout.addView(historicValues);
-		
-		for(int i=0; i<latest.getHistoricValues().size(); i++){
-			HistoricValues current = latest.getHistoricValues().get(i);
-			TextView samplingtimeH = new TextView(this);
-			samplingtimeH.setText(current.getSamplingTime());
-			samplingtimeH.setId(1);
-			samplingtimeH.setLayoutParams(new LayoutParams(
+		if(labresults.getAnswers().size() == 0){
+			TextView noAnswers = new TextView(this);
+			noAnswers.setText("No lab results");
+			noAnswers.setId(1);
+			noAnswers.setLayoutParams(new LayoutParams(
 					LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			samplingtimeH.setGravity(Gravity.CENTER_HORIZONTAL);
-			samplingtimeH.setTextSize(15);
-			samplingtimeH.setPadding(0,10, 0, 0);
-			latestLabResultLayout.addView(samplingtimeH);
-			
-			TextView samplingValue = new TextView(this);
-			samplingValue.setText(current.getValue());
-			samplingValue.setId(1);
-			samplingValue.setLayoutParams(new LayoutParams(
+			noAnswers.setPadding(0, 10, 0, 0);
+			noAnswers.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(noAnswers);
+		}else{
+			//Latest lab results
+			Analyses latest = labresults.getAnswers().get(0).getAnalyses().get(0);
+
+			//Sampling time
+			TextView samplingTime = new TextView(this);
+			samplingTime.setText(labresults.getAnswers().get(0).getSamplingTime());
+			samplingTime.setId(1);
+			samplingTime.setLayoutParams(new LayoutParams(
 					LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			samplingValue.setGravity(Gravity.CENTER_HORIZONTAL);
+			samplingTime.setPadding(0, 10, 0, 0);
+			samplingTime.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(samplingTime);
+
+			TextView analysisName = new TextView(this);
+			analysisName.setText(latest.getAnalysisName());
+			analysisName.setId(1);
+			analysisName.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			analysisName.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(analysisName);
+
+			TextView value = new TextView(this);
+			value.setText("Value: "+latest.getValue());
+			value.setId(1);
+			value.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			value.setGravity(Gravity.CENTER_HORIZONTAL);
 			if(latest.getOutsideNormalRange()){
-				samplingValue.setTextColor(Color.RED);
-			}else{
-				samplingValue.setTextColor(Color.rgb(0, 102, 0));
+				value.setTextColor(Color.RED);
 			}
-			samplingValue.setTextSize(18);
-			latestLabResultLayout.addView(samplingValue);
+			latestLabResultLayout.addView(value);
+
+			TextView min = new TextView(this);
+			min.setText("Min: "+latest.getMin());
+			min.setId(1);
+			min.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			min.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(min);
+
+			TextView max = new TextView(this);
+			max.setText("Max: "+latest.getMax());
+			max.setId(1);
+			max.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			max.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(max);
+
+			TextView historicValues = new TextView(this);
+			historicValues.setText("Previous values");
+			historicValues.setId(1);
+			historicValues.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			historicValues.setPadding(0, 10, 0, 0);
+			historicValues.setGravity(Gravity.CENTER_HORIZONTAL);
+			historicValues.setTypeface(null,Typeface.BOLD);
+			historicValues.setPadding(0, 10, 0, 0);
+			historicValues.setTextSize(18);
+			latestLabResultLayout.addView(historicValues);
+
+			for(int i=0; i<latest.getHistoricValues().size(); i++){
+				HistoricValues current = latest.getHistoricValues().get(i);
+				TextView samplingtimeH = new TextView(this);
+				samplingtimeH.setText(current.getSamplingTime());
+				samplingtimeH.setId(1);
+				samplingtimeH.setLayoutParams(new LayoutParams(
+						LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				samplingtimeH.setGravity(Gravity.CENTER_HORIZONTAL);
+				samplingtimeH.setTextSize(15);
+				samplingtimeH.setPadding(0,10, 0, 0);
+				latestLabResultLayout.addView(samplingtimeH);
+
+				TextView samplingValue = new TextView(this);
+				samplingValue.setText(current.getValue());
+				samplingValue.setId(1);
+				samplingValue.setLayoutParams(new LayoutParams(
+						LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				samplingValue.setGravity(Gravity.CENTER_HORIZONTAL);
+				if(latest.getOutsideNormalRange()){
+					samplingValue.setTextColor(Color.RED);
+				}else{
+					samplingValue.setTextColor(Color.rgb(0, 102, 0));
+				}
+				samplingValue.setTextSize(18);
+				latestLabResultLayout.addView(samplingValue);
+			}
 		}
-		
 		//Upcomming lab results
-		NextRequisition upcommingLabResults = labresults.getNextRequisition();
-		TextView samplingTimeU = new TextView(this);
-		samplingTimeU.setText(upcommingLabResults.getSamplingTime());
-		samplingTimeU.setId(1);
-		samplingTimeU.setLayoutParams(new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
-		samplingTimeU.setPadding(0, 10, 0, 0);
-		samplingTimeU.setGravity(Gravity.CENTER_HORIZONTAL);
-		latestLabResultLayout.addView(samplingTimeU);
-		
-		for(int j=0; j<upcommingLabResults.getAnalyses().size(); j++){
-			UAnalyses currentU = upcommingLabResults.getAnalyses().get(j);
-
-			TextView UanalysisName = new TextView(this);
-			UanalysisName.setText(currentU.getAnalysisName());
-			UanalysisName.setId(1);
-			UanalysisName.setLayoutParams(new LayoutParams(
+		if(labresults.getNextRequisition() == null){
+			TextView noUpcomming = new TextView(this);
+			noUpcomming.setText("No upcomming lab results");
+			noUpcomming.setId(1);
+			noUpcomming.setLayoutParams(new LayoutParams(
 					LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			UanalysisName.setGravity(Gravity.CENTER_HORIZONTAL);
-			UanalysisName.setTextSize(15);
-			UanalysisName.setPadding(0,10, 0, 0);
-			
-			TextView UanalysisPriority = new TextView(this);
-			UanalysisPriority.setText(currentU.getPriority());
-			UanalysisPriority.setId(1);
-			UanalysisPriority.setLayoutParams(new LayoutParams(
+			noUpcomming.setPadding(0, 10, 0, 0);
+			noUpcomming.setGravity(Gravity.CENTER_HORIZONTAL);
+			upcommingLabResultLayout.addView(noUpcomming);
+		}else{
+			NextRequisition upcommingLabResults = labresults.getNextRequisition();
+			TextView samplingTimeU = new TextView(this);
+			samplingTimeU.setText(upcommingLabResults.getSamplingTime());
+			samplingTimeU.setId(1);
+			samplingTimeU.setLayoutParams(new LayoutParams(
 					LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			UanalysisPriority.setGravity(Gravity.CENTER_HORIZONTAL);
+			samplingTimeU.setPadding(0, 10, 0, 0);
+			samplingTimeU.setGravity(Gravity.CENTER_HORIZONTAL);
+			latestLabResultLayout.addView(samplingTimeU);
 
-			UanalysisPriority.setTextSize(18);
-			
-			if(currentU.getPriority().equals("NORMAL")){
-				UanalysisPriority.setTextColor(Color.rgb(0, 102, 0));
+			for(int j=0; j<upcommingLabResults.getAnalyses().size(); j++){
+				UAnalyses currentU = upcommingLabResults.getAnalyses().get(j);
+
+				TextView UanalysisName = new TextView(this);
+				UanalysisName.setText(currentU.getAnalysisName());
+				UanalysisName.setId(1);
+				UanalysisName.setLayoutParams(new LayoutParams(
+						LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				UanalysisName.setGravity(Gravity.CENTER_HORIZONTAL);
+				UanalysisName.setTextSize(15);
+				UanalysisName.setPadding(0,10, 0, 0);
+
+				TextView UanalysisPriority = new TextView(this);
+				UanalysisPriority.setText(currentU.getPriority());
+				UanalysisPriority.setId(1);
+				UanalysisPriority.setLayoutParams(new LayoutParams(
+						LayoutParams.MATCH_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				UanalysisPriority.setGravity(Gravity.CENTER_HORIZONTAL);
+
+				UanalysisPriority.setTextSize(18);
+
+				if(currentU.getPriority().equals("NORMAL")){
+					UanalysisPriority.setTextColor(Color.rgb(0, 102, 0));
+				}
+
+				upcommingLabResultLayout.addView(UanalysisName);
+				upcommingLabResultLayout.addView(UanalysisPriority);
 			}
-			
-			upcommingLabResultLayout.addView(UanalysisName);
-			upcommingLabResultLayout.addView(UanalysisPriority);
 		}
 	}
 

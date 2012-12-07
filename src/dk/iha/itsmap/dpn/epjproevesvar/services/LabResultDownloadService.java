@@ -44,7 +44,7 @@ public class LabResultDownloadService extends Service{
     	try {
     		Log.d(TAG, "Updating lab results");
     		Log.d(TAG, "Authorization: "+authorization);
-    		result = new AsyncFavoritePatientsDownload().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/results/"+cprNumber+"/","Authorization","Basic "+authorization).get();
+    		result = new DownloadService().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/results/"+cprNumber+"/","Authorization","Basic "+authorization).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {

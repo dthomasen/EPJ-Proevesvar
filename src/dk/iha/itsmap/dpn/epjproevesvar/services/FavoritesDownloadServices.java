@@ -46,7 +46,7 @@ public class FavoritesDownloadServices extends Service{
     /** method for clients */
     public void updateFavorites(String authorization) {
     	try {
-    		result = new AsyncFavoritePatientsDownload().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/favorites/","Authorization","Basic "+authorization).get();
+    		result = new DownloadService().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/favorites/","Authorization","Basic "+authorization).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {

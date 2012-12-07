@@ -2,34 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu" >
+    tools:context=".PatientByCpr" >
 
     <Button
-        android:id="@+id/mypatients"
+        android:id="@+id/addnewfavoritebutton"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginTop="10dp"
-        android:text="My Patients" 
-        android:textSize="40dp" />
-
-    <Button
-        android:id="@+id/managefavorites"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_below="@+id/mypatients"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Manage Favorites" 
+        android:text="Add New Favorite"
         android:textSize="40dp" />
     
-    <Button
-        android:id="@+id/logout"
+     <Button
+        android:id="@+id/removefavoritebutton"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/logout"
-        android:layout_marginBottom="41dp"
-        android:text="Logout"
+        android:layout_below="@+id/addnewfavoritebutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Remove Favorite"
         android:textSize="40dp" />
 
 </RelativeLayout>

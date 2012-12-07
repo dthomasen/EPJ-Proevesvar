@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:gravity="center"
-        android:hint="Søgning"
+        android:hint="Search"
         android:windowSoftInputMode="stateHidden" >
 
         <requestFocus />

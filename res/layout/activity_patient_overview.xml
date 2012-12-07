@@ -9,16 +9,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/NameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="Name: "
-            android:textStyle="bold"
-            android:gravity="right" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/NameOutput"
@@ -29,8 +29,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/CPRLabel"
@@ -48,8 +48,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/ColorLabel"
@@ -67,8 +67,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/NotificationModeLabel"
@@ -89,40 +89,51 @@
         android:orientation="horizontal"
         android:paddingTop="30dp" >
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/LatestResultLayout" >
+            android:layout_weight="1" >
 
-            <TextView
-                android:id="@+id/LatestResultLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Latest lab results"
-                android:textStyle="bold" 
-                android:gravity="center_horizontal"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" 
-            android:id="@+id/UpcommingResultLayout" >
-
-            <TextView
-                android:id="@+id/UpcommingLabTests"
+            <LinearLayout
+                android:id="@+id/LatestResultLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Upcomming lab results"
-                android:textStyle="bold" 
-                android:gravity="center_horizontal"
-                android:textSize="20dp" />
-        </LinearLayout>
-        
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/LatestResultLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Latest lab results"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/UpcommingResultLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/UpcommingLabTests"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Upcomming lab results"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

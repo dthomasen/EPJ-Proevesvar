@@ -25,7 +25,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable;
 import android.text.Editable.Factory;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,12 +42,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 
-public class AddFavorite extends Activity implements OnClickListener {
+public class AddFavorite extends Activity implements OnClickListener, TextWatcher{
 
 	private EditText CPRInput;
 	private Button FindPatientButton;
 	private String authorization;
 	private static final String TAG="AddFavorite";
+	private int len=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,11 @@ public class AddFavorite extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_add_favorite);
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		CPRInput = (EditText) findViewById(R.id.cprTextInput);
+
+		CPRInput.addTextChangedListener(this);
+
 		authorization = getIntent().getExtras().getString("Authorization");
 		FindPatientButton = (Button) findViewById(R.id.submitcprbutton);
 		FindPatientButton.setOnClickListener(this);
@@ -87,8 +95,9 @@ public class AddFavorite extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.submitcprbutton:
 			try {
-				String result = new DownloadService().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/patientinformation/patients/"+CPRInput.getText(),"Authorization","Basic "+authorization).get();
-				
+				String cprWithoutDash = CPRInput.getText().toString().replaceAll("-", "");
+				String result = new DownloadService().execute("http://130.225.184.205:8082/","pfpas-mobile/rest/patientinformation/patients/"+cprWithoutDash,"Authorization","Basic "+authorization).get();
+
 				if(result.equals("notFound")){
 					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 							this);
@@ -103,7 +112,7 @@ public class AddFavorite extends Activity implements OnClickListener {
 							dialog.cancel();
 						}
 					});
-					
+
 					AlertDialog alertDialog = alertDialogBuilder.create();
 
 					alertDialog.show();
@@ -121,13 +130,13 @@ public class AddFavorite extends Activity implements OnClickListener {
 							dialog.cancel();
 						}
 					});
-					
+
 					AlertDialog alertDialog = alertDialogBuilder.create();
 
 					alertDialog.show();
 				}else{
-				PatientInformation favorites = new Gson().fromJson(result, PatientInformation.class);
-				buildDialog(favorites.getCpr(), favorites.getName());
+					PatientInformation favorites = new Gson().fromJson(result, PatientInformation.class);
+					buildDialog(cprWithoutDash, favorites.getName());
 				}
 			} catch (InterruptedException e) {
 			} catch (ExecutionException e) { }
@@ -142,13 +151,13 @@ public class AddFavorite extends Activity implements OnClickListener {
 
 		LayoutInflater factory = LayoutInflater.from(this);
 		View customDialog = factory.inflate(R.layout.custom_add_patient_dialog, null);
-		
+
 		alertDialogBuilder.setTitle("Are you sure?");
 
 		String alert1 = "Adding following patient to favorites: ";
 		String alert2 = "Name: " + name;
 		String alert3 = "CPR: " + cpr;
-		
+
 		//Populating color dropdown
 		final Spinner colorDropdown = (Spinner) customDialog.findViewById(R.id.ColorChooser);
 		final EditText noteInput = (EditText) customDialog.findViewById(R.id.noteInput);
@@ -161,8 +170,8 @@ public class AddFavorite extends Activity implements OnClickListener {
 		Log.d(TAG,"Data adapter: "+dataAdapter);
 		Log.d(TAG,"Colordropdown: "+colorDropdown);
 		colorDropdown.setAdapter(dataAdapter);
-		
-		
+
+
 		alertDialogBuilder
 		.setMessage(alert1 +"\n"+ alert2 +"\n"+ alert3)
 		.setCancelable(false)
@@ -199,47 +208,70 @@ public class AddFavorite extends Activity implements OnClickListener {
 		Log.d(TAG, "Json: "+json);
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setBooleanParameter("http.protocol.expect-continue", false);
-	    try {
-	        HttpPost request = new HttpPost("http://130.225.184.205:8082/pfpas-mobile/rest/favorites/"+cpr);
+		try {
+			HttpPost request = new HttpPost("http://130.225.184.205:8082/pfpas-mobile/rest/favorites/"+cpr);
 
-	        Log.d(TAG, "Authorization: "+authorization);
-	        request.addHeader("Authorization","Basic "+authorization);
-	        StringEntity se = new StringEntity(json);
-	        se.setContentType("application/json"); 
-	        request.setEntity(se);
-	        
-	        HttpResponse response = client.execute(request);
-	        int responseCode = response.getStatusLine().getStatusCode();
-	        
-	        if(responseCode == 409){
-	        	 NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	        	 Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
-	     	    PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
-	     	    note.setLatestEventInfo(this, "Couldn't add favorite",cpr+" already a favorite", i);
-	     	    
-	     	    mgr.notify(1, note);
-	        }else if(responseCode == 500){
-	        	 NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	        	 Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
-	     	    PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
-	     	    note.setLatestEventInfo(this, "Server Error","And unknown server error occured", i);
-	     	    
-	     	    mgr.notify(1, note);
-	        }else if(responseCode == 400){
-	        	 NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	        	 Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
-	     	    PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
-	     	    note.setLatestEventInfo(this, "Unknown patient","Patient with CPR "+cpr+" couldn't be found", i);
-	     	    
-	     	    mgr.notify(1, note);
-	        }
-	        
-	        Log.d(TAG, Integer.toString(responseCode));
-	        // handle response here...
-	    }catch (Exception ex) {
-	        // handle exception here
-	    } finally {
-	        client.getConnectionManager().shutdown();
-	    }
+			Log.d(TAG, "Authorization: "+authorization);
+			request.addHeader("Authorization","Basic "+authorization);
+			StringEntity se = new StringEntity(json);
+			se.setContentType("application/json"); 
+			request.setEntity(se);
+
+			HttpResponse response = client.execute(request);
+			int responseCode = response.getStatusLine().getStatusCode();
+
+			if(responseCode == 409){
+				NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
+				PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
+				note.setLatestEventInfo(this, "Couldn't add favorite",cpr+" already a favorite", i);
+
+				mgr.notify(1, note);
+			}else if(responseCode == 500){
+				NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
+				PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
+				note.setLatestEventInfo(this, "Server Error","And unknown server error occured", i);
+
+				mgr.notify(1, note);
+			}else if(responseCode == 400){
+				NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				Notification note=new Notification(R.drawable.ic_launcher,"EPJ Error",System.currentTimeMillis());
+				PendingIntent i=PendingIntent.getActivity(this, 0,new Intent(this, AddFavorite.class),0);
+				note.setLatestEventInfo(this, "Unknown patient","Patient with CPR "+cpr+" couldn't be found", i);
+
+				mgr.notify(1, note);
+			}
+
+			Log.d(TAG, Integer.toString(responseCode));
+			// handle response here...
+		}catch (Exception ex) {
+			// handle exception here
+		} finally {
+			client.getConnectionManager().shutdown();
+		}
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		String str = CPRInput.getText().toString(); 
+		Log.d(TAG,"After text changed");
+		if(str.length()==6&& len <str.length()){//len check for backspace 
+			Log.d(TAG,"After text change 2");
+			CPRInput.append("-");
+		}		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		 String str = CPRInput.getText().toString(); 
+         len = str.length();
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		// TODO Auto-generated method stub
+
 	} 
 }

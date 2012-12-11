@@ -12,6 +12,7 @@ import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices;
 import dk.iha.itsmap.dpn.epjproevesvar.services.LabResultDownloadService;
 import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices.GetFavoritesBinder;
 import dk.iha.itsmap.dpn.epjproevesvar.services.LabResultDownloadService.GetLabResultBinder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.app.Activity;
@@ -21,18 +22,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.widget.LinearLayout;
 
-public class PatientOverview extends Activity {
+public class PatientOverview extends Activity implements OnClickListener {
 
 	private final static String TAG="PatientsOverview";
 	private TextView name;
@@ -47,6 +52,7 @@ public class PatientOverview extends Activity {
 	private String cprNumber;
 	private LinearLayout latestLabResultLayout;
 	private LinearLayout upcommingLabResultLayout;
+	private ImageButton callButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,8 @@ public class PatientOverview extends Activity {
 		Log.d(TAG,getIntent().getExtras().getString("Authorization"));
 		authorization = getIntent().getExtras().getString("Authorization");
 		latestLabResultLayout = (LinearLayout)findViewById(R.id.LatestResultLayout);
+		callButton = (ImageButton) findViewById(R.id.CallImageButton);
+		callButton.setOnClickListener(this);
 		upcommingLabResultLayout = (LinearLayout)findViewById(R.id.UpcommingResultLayout);
 		updateLabResultReciever = new BroadcastReceiver() {
 			@Override
@@ -330,4 +338,48 @@ public class PatientOverview extends Activity {
 			mBound = false;
 		}
 	}
+
+	@Override
+	public void onClick(View v) {
+		// Make sure the Skype for Android client is installed
+		  if (!isSkypeClientInstalled(this)) {
+		    goToMarket(this);
+		    return;
+		  }
+
+		  // Create the Intent from our Skype URI
+		  Uri skypeUri = Uri.parse("skype:echo123?call");
+		  Intent skypeIntent = new Intent(Intent.ACTION_VIEW, skypeUri);
+
+		  // Restrict the Intent to being handled by the Skype for Android client only
+		  skypeIntent.setComponent(new ComponentName("com.skype.raider", "com.skype.raider.Main"));
+		  skypeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		  // Initiate the Intent. It should never fail since we've already established the
+		  // presence of its handler (although there is an extremely minute window where that
+		  // handler can go away...)
+		  this.startActivity(skypeIntent);
+
+		  return;
+	}
+	
+	public void goToMarket(Context myContext) {
+		  Uri marketUri = Uri.parse("market://details?id=com.skype.raider");
+		  Intent myIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+		  myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		  myContext.startActivity(myIntent);
+
+		  return;
+		}
+	
+	public boolean isSkypeClientInstalled(Context myContext) {
+		  PackageManager myPackageMgr = myContext.getPackageManager();
+		  try {
+		    myPackageMgr.getPackageInfo("com.skype.raider", PackageManager.GET_ACTIVITIES);
+		  }
+		  catch (PackageManager.NameNotFoundException e) {
+		    return (false);
+		  }
+		  return (true);
+		}
 }

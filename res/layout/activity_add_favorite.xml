@@ -15,10 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CPR-Number"
-            android:inputType="text"
+            android:inputType="textCapCharacters"
             android:maxLines="1"
             android:singleLine="true"
-            android:textSize="35dp" >
+            android:textSize="35dp"
+             >
 
             <requestFocus />
         </EditText>

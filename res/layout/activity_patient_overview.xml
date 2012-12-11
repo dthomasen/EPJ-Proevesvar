@@ -2,92 +2,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
-    android:orientation="vertical"
+    android:layout_marginTop="30dp"
+    android:orientation="horizontal"
     tools:context=".PatientOverview" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="vertical" 
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/NameLabel"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Name: "
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:orientation="vertical" 
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/NameOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/NameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="Name: "
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/CPRLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CPR: "
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/NameOutput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/CPROutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/CPRLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CPR: "
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ColorLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Color: "
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/CPROutput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/ColorOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/ColorLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Color: "
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/NotificationModeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notification: "
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/ColorOutput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/NotificationOutput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="30dp" >
+                <TextView
+                    android:id="@+id/NotificationModeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notification: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/NotificationOutput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -111,6 +116,23 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/testlao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/CallImageButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/sym_call_outgoing" 
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -132,6 +154,7 @@
                     android:text="Upcomming lab results"
                     android:textSize="20dp"
                     android:textStyle="bold" />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

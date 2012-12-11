@@ -71,7 +71,7 @@ public class PatientOverview extends Activity {
 
 		Bundle bundle = getIntent().getExtras();
 		Favorite choosen = (Favorite) bundle.get("ChoosenPatient");
-
+		getActionBar().setTitle(choosen.getName());
 		name = (TextView) findViewById(R.id.NameOutput);
 		cpr = (TextView) findViewById(R.id.CPROutput);
 

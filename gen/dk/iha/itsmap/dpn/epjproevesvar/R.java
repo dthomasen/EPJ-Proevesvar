@@ -8,49 +8,57 @@
 package dk.iha.itsmap.dpn.epjproevesvar;
 
 public final class R {
+    public static final class array {
+        public static final int pref_example_list_titles=0x7f060000;
+        public static final int pref_example_list_values=0x7f060001;
+        public static final int pref_sync_frequency_titles=0x7f060002;
+        public static final int pref_sync_frequency_values=0x7f060003;
+    }
     public static final class attr {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int CPRLabel=0x7f070012;
-        public static final int CPROutput=0x7f070013;
-        public static final int ColorChooser=0x7f070020;
-        public static final int ColorLabel=0x7f070014;
-        public static final int ColorOutput=0x7f070015;
-        public static final int FilterText=0x7f07000e;
-        public static final int LatestResultLabel=0x7f070019;
-        public static final int LatestResultLayout=0x7f070018;
-        public static final int NameLabel=0x7f070010;
-        public static final int NameOutput=0x7f070011;
-        public static final int NotificationModeLabel=0x7f070016;
-        public static final int NotificationOutput=0x7f070017;
-        public static final int UpcommingLabTests=0x7f07001b;
-        public static final int UpcommingResultLayout=0x7f07001a;
-        public static final int addnewfavoritebutton=0x7f07000c;
-        public static final int cprTextInput=0x7f070000;
-        public static final int email=0x7f070005;
-        public static final int line_cpr=0x7f070022;
-        public static final int line_name=0x7f070021;
-        public static final int login=0x7f070007;
-        public static final int login_form=0x7f070004;
-        public static final int login_status=0x7f070002;
-        public static final int login_status_message=0x7f070003;
-        public static final int logout=0x7f07000b;
-        public static final int managefavorites=0x7f07000a;
-        public static final int menu_forgot_password=0x7f070024;
-        public static final int menu_settings=0x7f070023;
-        public static final int mypatients=0x7f070009;
-        public static final int noteInput=0x7f07001e;
-        public static final int password=0x7f070006;
-        public static final int patientListView=0x7f07000f;
-        public static final int removeFavoriteLabel=0x7f07001c;
-        public static final int removefavoritebutton=0x7f07000d;
-        public static final int sign_in_button=0x7f070008;
-        public static final int submitcprbutton=0x7f070001;
-        public static final int textView1=0x7f07001d;
-        public static final int textView2=0x7f07001f;
+        public static final int CPRLabel=0x7f090012;
+        public static final int CPROutput=0x7f090013;
+        public static final int CallImageButton=0x7f09001b;
+        public static final int ColorChooser=0x7f090022;
+        public static final int ColorLabel=0x7f090014;
+        public static final int ColorOutput=0x7f090015;
+        public static final int FilterText=0x7f09000e;
+        public static final int LatestResultLabel=0x7f090019;
+        public static final int LatestResultLayout=0x7f090018;
+        public static final int NameLabel=0x7f090010;
+        public static final int NameOutput=0x7f090011;
+        public static final int NotificationModeLabel=0x7f090016;
+        public static final int NotificationOutput=0x7f090017;
+        public static final int UpcommingLabTests=0x7f09001d;
+        public static final int UpcommingResultLayout=0x7f09001c;
+        public static final int addnewfavoritebutton=0x7f09000c;
+        public static final int cprTextInput=0x7f090000;
+        public static final int email=0x7f090005;
+        public static final int line_cpr=0x7f090024;
+        public static final int line_name=0x7f090023;
+        public static final int login=0x7f090007;
+        public static final int login_form=0x7f090004;
+        public static final int login_status=0x7f090002;
+        public static final int login_status_message=0x7f090003;
+        public static final int logout=0x7f09000b;
+        public static final int managefavorites=0x7f09000a;
+        public static final int menu_forgot_password=0x7f090026;
+        public static final int menu_settings=0x7f090025;
+        public static final int mypatients=0x7f090009;
+        public static final int noteInput=0x7f090020;
+        public static final int password=0x7f090006;
+        public static final int patientListView=0x7f09000f;
+        public static final int removeFavoriteLabel=0x7f09001e;
+        public static final int removefavoritebutton=0x7f09000d;
+        public static final int sign_in_button=0x7f090008;
+        public static final int submitcprbutton=0x7f090001;
+        public static final int testlao=0x7f09001a;
+        public static final int textView1=0x7f09001f;
+        public static final int textView2=0x7f090021;
     }
     public static final class layout {
         public static final int activity_add_favorite=0x7f030000;
@@ -64,40 +72,62 @@ public final class R {
         public static final int custom_patient_view=0x7f030008;
     }
     public static final class menu {
-        public static final int activity_add_favorite=0x7f060000;
-        public static final int activity_favorite_patients=0x7f060001;
-        public static final int activity_login=0x7f060002;
-        public static final int activity_main_menu=0x7f060003;
-        public static final int activity_my_patients=0x7f060004;
-        public static final int activity_patient_information=0x7f060005;
-        public static final int activity_patient_overview=0x7f060006;
-        public static final int activity_remove_favorite=0x7f060007;
-        public static final int activity_test=0x7f060008;
+        public static final int activity_add_favorite=0x7f080000;
+        public static final int activity_favorite_patients=0x7f080001;
+        public static final int activity_login=0x7f080002;
+        public static final int activity_main_menu=0x7f080003;
+        public static final int activity_my_patients=0x7f080004;
+        public static final int activity_patient_information=0x7f080005;
+        public static final int activity_patient_overview=0x7f080006;
+        public static final int activity_remove_favorite=0x7f080007;
+        public static final int activity_test=0x7f080008;
     }
     public static final class string {
-        public static final int action_sign_in_register=0x7f04000d;
-        public static final int action_sign_in_short=0x7f04000e;
-        public static final int app_name=0x7f040000;
-        public static final int error_field_required=0x7f040014;
-        public static final int error_incorrect_password=0x7f040013;
-        public static final int error_invalid_email=0x7f040011;
-        public static final int error_invalid_password=0x7f040012;
-        public static final int hello_world=0x7f040001;
-        public static final int login_progress_signing_in=0x7f040010;
-        public static final int menu_forgot_password=0x7f04000f;
-        public static final int menu_settings=0x7f040002;
+        public static final int action_sign_in_register=0x7f05000d;
+        public static final int action_sign_in_short=0x7f05000e;
+        public static final int app_name=0x7f050000;
+        public static final int error_field_required=0x7f050014;
+        public static final int error_incorrect_password=0x7f050013;
+        public static final int error_invalid_email=0x7f050011;
+        public static final int error_invalid_password=0x7f050012;
+        public static final int hello_world=0x7f050001;
+        public static final int login_progress_signing_in=0x7f050010;
+        public static final int menu_forgot_password=0x7f05000f;
+        public static final int menu_settings=0x7f050002;
+        public static final int pref_default_display_name=0x7f05001a;
+        public static final int pref_description_social_recommendations=0x7f050018;
+        /**  Example settings for Data & Sync 
+         */
+        public static final int pref_header_data_sync=0x7f05001c;
+        /**  Strings related to Settings 
+ Example General settings 
+         */
+        public static final int pref_header_general=0x7f050016;
+        /**  Example settings for Notifications 
+         */
+        public static final int pref_header_notifications=0x7f05001f;
+        public static final int pref_ringtone_silent=0x7f050022;
+        public static final int pref_title_add_friends_to_messages=0x7f05001b;
+        public static final int pref_title_display_name=0x7f050019;
+        public static final int pref_title_new_message_notifications=0x7f050020;
+        public static final int pref_title_ringtone=0x7f050021;
+        public static final int pref_title_social_recommendations=0x7f050017;
+        public static final int pref_title_sync_frequency=0x7f05001d;
+        public static final int pref_title_system_sync_settings=0x7f05001e;
+        public static final int pref_title_vibrate=0x7f050023;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f04000b;
-        public static final int prompt_password=0x7f04000c;
-        public static final int title_activity_add_favorite=0x7f040008;
-        public static final int title_activity_favorite_patients=0x7f040004;
-        public static final int title_activity_login=0x7f04000a;
-        public static final int title_activity_manage_favorites=0x7f040005;
-        public static final int title_activity_my_patients=0x7f040003;
-        public static final int title_activity_patient_overview=0x7f040007;
-        public static final int title_activity_remove_favorite=0x7f040009;
-        public static final int title_activity_test=0x7f040006;
+        public static final int prompt_email=0x7f05000b;
+        public static final int prompt_password=0x7f05000c;
+        public static final int title_activity_add_favorite=0x7f050008;
+        public static final int title_activity_favorite_patients=0x7f050004;
+        public static final int title_activity_login=0x7f05000a;
+        public static final int title_activity_manage_favorites=0x7f050005;
+        public static final int title_activity_my_patients=0x7f050003;
+        public static final int title_activity_patient_overview=0x7f050007;
+        public static final int title_activity_patient_overview_settings=0x7f050015;
+        public static final int title_activity_remove_favorite=0x7f050009;
+        public static final int title_activity_test=0x7f050006;
     }
     public static final class style {
         /** 
@@ -123,11 +153,17 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
-        public static final int LoginFormContainer=0x7f050002;
+        public static final int AppTheme=0x7f070001;
+        public static final int LoginFormContainer=0x7f070002;
+    }
+    public static final class xml {
+        public static final int pref_data_sync=0x7f040000;
+        public static final int pref_general=0x7f040001;
+        public static final int pref_headers=0x7f040002;
+        public static final int pref_notification=0x7f040003;
     }
 }

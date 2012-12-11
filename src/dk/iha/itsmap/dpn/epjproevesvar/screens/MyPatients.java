@@ -55,11 +55,6 @@ public class MyPatients extends Activity implements OnItemClickListener, OnClick
 		setContentView(R.layout.activity_my_patients);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-//		Favorite test = new Favorite();
-//		test.setCpr("2910901667");
-//		test.setName("Dennis");
-//		favorites.add(test);
-		
 		authorization = getIntent().getExtras().getString("Authorization");
 		favoritesList = (ListView) findViewById(R.id.patientListView);
 		filterInput = (PatientsFilterView) findViewById(R.id.FilterText);
@@ -70,8 +65,6 @@ public class MyPatients extends Activity implements OnItemClickListener, OnClick
 		updateReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-            	favoritesList.invalidate();
-            	favoritesList.invalidateViews();
                 Log.d(TAG,"FavoritesUpdated broadcast recieved");
                 favorites = getFavoritesService.getFavorites();
                 

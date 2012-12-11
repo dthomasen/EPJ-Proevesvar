@@ -1,5 +1,7 @@
 package dk.iha.itsmap.dpn.epjproevesvar.screens;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
@@ -23,13 +25,18 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable.Factory;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 
 public class AddFavorite extends Activity implements OnClickListener {
@@ -133,20 +140,40 @@ public class AddFavorite extends Activity implements OnClickListener {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
 
+		LayoutInflater factory = LayoutInflater.from(this);
+		View customDialog = factory.inflate(R.layout.custom_add_patient_dialog, null);
+		
 		alertDialogBuilder.setTitle("Are you sure?");
 
 		String alert1 = "Adding following patient to favorites: ";
 		String alert2 = "Name: " + name;
 		String alert3 = "CPR: " + cpr;
-
+		
+		//Populating color dropdown
+		final Spinner colorDropdown = (Spinner) customDialog.findViewById(R.id.ColorChooser);
+		final EditText noteInput = (EditText) customDialog.findViewById(R.id.noteInput);
+		List<String> list = new ArrayList<String>();
+		for(Color color : Color.values()){
+			list.add(color.name());
+		}
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		Log.d(TAG,"Data adapter: "+dataAdapter);
+		Log.d(TAG,"Colordropdown: "+colorDropdown);
+		colorDropdown.setAdapter(dataAdapter);
+		
+		
 		alertDialogBuilder
 		.setMessage(alert1 +"\n"+ alert2 +"\n"+ alert3)
 		.setCancelable(false)
+		.setView(customDialog)
 		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
 				new Thread(){
 					public void run(){
-						addFavoriteToServer(cpr, name);
+						Log.d(TAG,"Color choosed: "+colorDropdown.getSelectedItem());
+						Log.d(TAG,"Note entered: "+noteInput.getText().toString());
+						addFavoriteToServer(cpr, name, (String) colorDropdown.getSelectedItem(), noteInput.getText().toString());
 					}
 				}.start();
 				AddFavorite.this.finish();
@@ -163,11 +190,11 @@ public class AddFavorite extends Activity implements OnClickListener {
 		alertDialog.show();
 	}
 
-	public void addFavoriteToServer(String cpr, String name) {
+	public void addFavoriteToServer(String cpr, String name, String color, String patientNote) {
 		Log.d(TAG, "Before json");
 
 		Gson gson = new Gson();
-		String json = gson.toJson(new AddUpdateFavoritePatient("detteerennote",Color.WHITE)); 
+		String json = gson.toJson(new AddUpdateFavoritePatient(patientNote,Color.valueOf(color))); 
 
 		Log.d(TAG, "Json: "+json);
 		HttpClient client = new DefaultHttpClient();

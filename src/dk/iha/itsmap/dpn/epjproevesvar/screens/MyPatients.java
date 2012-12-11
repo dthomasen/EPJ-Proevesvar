@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dk.iha.itsmap.dpn.epjproevesvar.R;
+import dk.iha.itsmap.dpn.epjproevesvar.business.Favorite;
 import dk.iha.itsmap.dpn.epjproevesvar.business.PatientsFilterView;
 import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices;
+import dk.iha.itsmap.dpn.epjproevesvar.services.PatientBaseAdapter;
 import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices.GetFavoritesBinder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -30,19 +32,18 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class MyPatients extends ListActivity implements OnItemClickListener, OnClickListener, TextWatcher{
+public class MyPatients extends Activity implements OnItemClickListener, OnClickListener, TextWatcher{
 
 	private static final String TAG="MyPatients";
     private BroadcastReceiver updateReciever;
-	private Favorite[] favorites;
+	private ArrayList<Favorite> favorites = new ArrayList<Favorite>();
 	private FavoritesDownloadServices getFavoritesService;
-	private ArrayList<String> favoriteNames;
-	private HashMap<String, Favorite> favoriteMap;
-	private ArrayAdapter<String> adapter;
+	private PatientBaseAdapter adapter;
 	private ListView favoritesList;
 	private boolean mBound = false;
 	private PatientsFilterView filterInput;
@@ -53,24 +54,29 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_patients);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+//		Favorite test = new Favorite();
+//		test.setCpr("2910901667");
+//		test.setName("Dennis");
+//		favorites.add(test);
+		
 		authorization = getIntent().getExtras().getString("Authorization");
-		favoritesList = getListView();
-		favoriteNames = new ArrayList<String>();
-		adapter = new ArrayAdapter<String>(this, R.layout.customlistview, favoriteNames);
+		favoritesList = (ListView) findViewById(R.id.patientListView);
 		filterInput = (PatientsFilterView) findViewById(R.id.FilterText);
 		filterInput.addTextChangedListener(this);
+		adapter = new PatientBaseAdapter(this, favorites);
 		favoritesList.setAdapter(adapter);
 		favoritesList.setOnItemClickListener(this);
 		updateReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+            	favoritesList.invalidate();
+            	favoritesList.invalidateViews();
                 Log.d(TAG,"FavoritesUpdated broadcast recieved");
                 favorites = getFavoritesService.getFavorites();
-                favoriteNames.clear();
-                for(Favorite s : favorites){
-                	favoriteNames.add(s.getName());
-                }
-                favoriteMap = getFavoritesService.getFavoritesMap();
+                
+                Log.d(TAG,"Fav size: "+favorites.size());
+                adapter.sendList(favorites);
                 adapter.notifyDataSetChanged();
             }
         };
@@ -156,7 +162,7 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		MyPatients.this.adapter.getFilter().filter(s);
+//		MyPatients.this.adapter.getFilter().filter(s);
 	}
 
 	@Override
@@ -166,10 +172,11 @@ public class MyPatients extends ListActivity implements OnItemClickListener, OnC
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 		Log.d(TAG,"StationsListItem clicked");
-		Favorite choosenFavorites = favoriteMap.get(((TextView) view).getText());
+		Favorite choosenFavorite = (Favorite) favoritesList.getItemAtPosition(position);
+//		Favorite choosenFavorites = favoriteMap.get();
 		
 		Intent i = new Intent(this, PatientOverview.class);
-		i.putExtra("ChoosenPatient", choosenFavorites);
+		i.putExtra("ChoosenPatient", choosenFavorite);
 		i.putExtra("Authorization", authorization);
 		startActivityForResult(i, 0);
 	}

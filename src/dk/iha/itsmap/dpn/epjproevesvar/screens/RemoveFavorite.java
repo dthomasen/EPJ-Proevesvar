@@ -17,7 +17,9 @@ import dk.iha.itsmap.dpn.epjproevesvar.R.layout;
 import dk.iha.itsmap.dpn.epjproevesvar.R.menu;
 import dk.iha.itsmap.dpn.epjproevesvar.business.AddUpdateFavoritePatient;
 import dk.iha.itsmap.dpn.epjproevesvar.business.Color;
+import dk.iha.itsmap.dpn.epjproevesvar.business.Favorite;
 import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices;
+import dk.iha.itsmap.dpn.epjproevesvar.services.PatientBaseAdapter;
 import dk.iha.itsmap.dpn.epjproevesvar.services.FavoritesDownloadServices.GetFavoritesBinder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -47,8 +49,8 @@ public class RemoveFavorite extends ListActivity implements OnItemClickListener 
 	private static final String TAG="RemoveFavorites";
 	private String authorization;
 	private ListView favoritesList;
-	private ArrayList<String> favoriteNames;
-	private ArrayAdapter<String> adapter;
+	private ArrayList<Favorite> favorites = new ArrayList<Favorite>();
+	private PatientBaseAdapter adapter;
 	private BroadcastReceiver updateReciever;
 	private FavoritesDownloadServices getFavoritesService;
 	protected HashMap<String, Favorite> favoriteMap;
@@ -60,24 +62,19 @@ public class RemoveFavorite extends ListActivity implements OnItemClickListener 
 		setContentView(R.layout.activity_remove_favorite);
 		authorization = getIntent().getExtras().getString("Authorization");
 		favoritesList = getListView();
-		favoriteNames = new ArrayList<String>();
-		adapter = new ArrayAdapter<String>(this, R.layout.customlistview, favoriteNames);
+		adapter = new PatientBaseAdapter(this, favorites);
 		favoritesList.setAdapter(adapter);
 		favoritesList.setOnItemClickListener(this);
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		updateReciever = new BroadcastReceiver() {
-			private Favorite[] favorites;
+			private ArrayList<Favorite> favorites;
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				Log.d(TAG,"FavoritesUpdated broadcast recieved");
 				favorites = getFavoritesService.getFavorites();
-				favoriteNames.clear();
-				for(Favorite s : favorites){
-					favoriteNames.add(s.getName());
-				}
-				favoriteMap = getFavoritesService.getFavoritesMap();
+				adapter.sendList(favorites);
 				adapter.notifyDataSetChanged();
 			}
 		};
@@ -154,8 +151,8 @@ public class RemoveFavorite extends ListActivity implements OnItemClickListener 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 		Log.d(TAG,"StationsListItem clicked");
-		Favorite choosenFavorites = favoriteMap.get(((TextView) view).getText());
-		buildDialog(choosenFavorites.getCpr(), choosenFavorites.getName());
+		Favorite choosenFavorite = (Favorite) favoritesList.getItemAtPosition(position);
+		buildDialog(choosenFavorite.getCpr(), choosenFavorite.getName());
 		
 	}
 	

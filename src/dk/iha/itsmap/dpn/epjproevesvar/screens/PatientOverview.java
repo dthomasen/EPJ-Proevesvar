@@ -2,6 +2,7 @@ package dk.iha.itsmap.dpn.epjproevesvar.screens;
 
 import dk.iha.itsmap.dpn.epjproevesvar.R;
 import dk.iha.itsmap.dpn.epjproevesvar.business.Analyses;
+import dk.iha.itsmap.dpn.epjproevesvar.business.Favorite;
 import dk.iha.itsmap.dpn.epjproevesvar.business.HistoricValues;
 import dk.iha.itsmap.dpn.epjproevesvar.business.LabResult;
 import dk.iha.itsmap.dpn.epjproevesvar.business.NextRequisition;

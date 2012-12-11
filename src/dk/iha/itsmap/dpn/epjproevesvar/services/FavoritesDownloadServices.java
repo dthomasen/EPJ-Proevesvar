@@ -1,11 +1,12 @@
 package dk.iha.itsmap.dpn.epjproevesvar.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import com.google.gson.Gson;
 
-import dk.iha.itsmap.dpn.epjproevesvar.screens.Favorite;
+import dk.iha.itsmap.dpn.epjproevesvar.business.Favorite;
 
 
 import android.app.Service;
@@ -21,8 +22,8 @@ public class FavoritesDownloadServices extends Service{
 	 // Binder given to clients
     private final IBinder mBinder = new GetFavoritesBinder();
     private String result = "";
-    private HashMap<String, Favorite> favoritesMap = new HashMap<String, Favorite>();
-    private Favorite[] favorites = null;
+    private ArrayList<Favorite> favorites = new ArrayList<Favorite>();
+	private Favorite[] favoritesList;
 
     public class GetFavoritesBinder extends Binder {
         public FavoritesDownloadServices getService() {
@@ -35,11 +36,7 @@ public class FavoritesDownloadServices extends Service{
         return mBinder;
     }
     
-    public HashMap<String, Favorite> getFavoritesMap(){
-    	return favoritesMap;
-    }
-    
-    public Favorite[] getFavorites(){
+    public ArrayList<Favorite> getFavorites(){
     	return favorites;
     }
     
@@ -53,10 +50,9 @@ public class FavoritesDownloadServices extends Service{
 			e.printStackTrace();
 		}
     	
-  		favorites = new Gson().fromJson(result, Favorite[].class);
-  		favoritesMap.clear();
-  		for(Favorite s : favorites){
-  			favoritesMap.put(s.getName(), s);
+  		favoritesList = new Gson().fromJson(result, Favorite[].class);
+  		for(Favorite s : favoritesList){
+  			favorites.add(s);
   		}
   		Intent i = new Intent("FavoritesUpdated");
   		

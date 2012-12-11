@@ -5,8 +5,8 @@ import java.util.concurrent.ExecutionException;
 
 import com.google.gson.Gson;
 
+import dk.iha.itsmap.dpn.epjproevesvar.business.Favorite;
 import dk.iha.itsmap.dpn.epjproevesvar.business.LabResult;
-import dk.iha.itsmap.dpn.epjproevesvar.screens.Favorite;
 
 
 import android.app.Service;

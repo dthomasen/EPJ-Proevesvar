@@ -1,42 +1,26 @@
 package dk.iha.itsmap.dpn.epjproevesvar.screens;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 
 import com.google.gson.Gson;
 
 import dk.iha.itsmap.dpn.epjproevesvar.R;
-import dk.iha.itsmap.dpn.epjproevesvar.R.layout;
-import dk.iha.itsmap.dpn.epjproevesvar.R.menu;
 import dk.iha.itsmap.dpn.epjproevesvar.business.AddUpdateFavoritePatient;
 import dk.iha.itsmap.dpn.epjproevesvar.business.Color;
 import dk.iha.itsmap.dpn.epjproevesvar.business.PatientInformation;
 import dk.iha.itsmap.dpn.epjproevesvar.services.DownloadService;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;

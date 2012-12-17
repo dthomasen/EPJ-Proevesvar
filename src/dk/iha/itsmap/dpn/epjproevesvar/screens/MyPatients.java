@@ -155,7 +155,7 @@ public class MyPatients extends Activity implements OnItemClickListener, OnClick
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-//		MyPatients.this.adapter.getFilter().filter(s);
+		MyPatients.this.adapter.getFilter().filter(s);
 	}
 
 	@Override

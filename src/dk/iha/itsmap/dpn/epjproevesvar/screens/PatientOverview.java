@@ -94,6 +94,10 @@ public class PatientOverview extends Activity implements OnClickListener {
 	}
 
 	private void updateLabResultViews(LabResult labresults){
+		
+		latestLabResultLayout.removeAllViewsInLayout();
+		upcommingLabResultLayout.removeAllViewsInLayout();
+		
 		if(labresults.getAnswers().size() == 0){
 			TextView noAnswers = new TextView(this);
 			noAnswers.setText("No lab results");

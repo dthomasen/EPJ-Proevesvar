@@ -105,15 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/LatestResultLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Latest lab results"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -144,16 +135,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/UpcommingLabTests"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Upcomming lab results"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

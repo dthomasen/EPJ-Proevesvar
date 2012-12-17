@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -97,6 +98,24 @@ public class PatientOverview extends Activity implements OnClickListener {
 		
 		latestLabResultLayout.removeAllViewsInLayout();
 		upcommingLabResultLayout.removeAllViewsInLayout();
+		
+		TextView latestResultsLabel = new TextView(this);
+		latestResultsLabel.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		latestResultsLabel.setGravity(Gravity.CENTER_HORIZONTAL);
+		latestResultsLabel.setText("Latest lab results");
+		latestResultsLabel.setTextSize(20f);
+		latestResultsLabel.setTypeface(null,Typeface.BOLD);
+		
+		((ViewGroup) findViewById(R.id.LatestResultLayout)).addView(latestResultsLabel);
+		
+		TextView upcommingResultsLabel = new TextView(this);
+		upcommingResultsLabel.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		upcommingResultsLabel.setGravity(Gravity.CENTER_HORIZONTAL);
+		upcommingResultsLabel.setText("Upcomming lab results");
+		upcommingResultsLabel.setTextSize(20f);
+		upcommingResultsLabel.setTypeface(null, Typeface.BOLD);
+		
+		((ViewGroup) findViewById(R.id.UpcommingResultLayout)).addView(upcommingResultsLabel);
 		
 		if(labresults.getAnswers().size() == 0){
 			TextView noAnswers = new TextView(this);
